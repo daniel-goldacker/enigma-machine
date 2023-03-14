@@ -1,7 +1,5 @@
 package io.github.danielgoldacker.enigma.rest;
 
-
-
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -22,12 +20,10 @@ import io.github.danielgoldacker.enigma.rest.dto.ResponseError;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EnigmaResource {
-    private EnigmaRepository repository;
     private Validator validator; 
 
      @Inject
-     public EnigmaResource(EnigmaRepository repository, Validator validator){
-         this.repository = repository;
+     public EnigmaResource(Validator validator){
          this.validator = validator;
      }
 
@@ -39,8 +35,10 @@ public class EnigmaResource {
             return ResponseError.createFromValidation(violations).withStatusCode(ResponseError.UNPROCESSABLE_ENTITY_STATUS);
         }
 
-        EncryptResponse encryptResponse = new EncryptResponse();
-        String encryptedMessage = repository.encrypt(encryptRequest.getMessage(), encryptRequest.getKeyCryptography());
+        EnigmaRepository enigma = new EnigmaRepository(encryptRequest.getRotorPosition());
+        String encryptedMessage = enigma.encrypt(encryptRequest.getMessage());
+       
+        EncryptResponse encryptResponse = new EncryptResponse();    
         encryptResponse.setEncryptedMessage(encryptedMessage);
         return Response.status(Response.Status.OK.getStatusCode()).entity(encryptResponse).build();
     }
@@ -53,8 +51,10 @@ public class EnigmaResource {
             return ResponseError.createFromValidation(violations).withStatusCode(ResponseError.UNPROCESSABLE_ENTITY_STATUS);
         }
 
+        EnigmaRepository enigma = new EnigmaRepository(decryptRequest.getRotorPosition());
+        String decryptedMessage = enigma.decrypt(decryptRequest.getEncryptedMessage());
+
         DecryptResponse decryptResponse = new DecryptResponse();
-        String decryptedMessage = repository.decrypt(decryptRequest.getEncryptedMessage(), decryptRequest.getKeyCryptography());
         decryptResponse.setDecryptedMessage(decryptedMessage);
         return Response.status(Response.Status.OK.getStatusCode()).entity(decryptResponse).build();
     }

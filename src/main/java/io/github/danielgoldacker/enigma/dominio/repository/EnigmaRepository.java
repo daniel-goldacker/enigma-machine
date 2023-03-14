@@ -1,59 +1,39 @@
 package io.github.danielgoldacker.enigma.dominio.repository;
 
-import javax.enterprise.context.ApplicationScoped;
+public class EnigmaRepository {
+    private int rotorPosition;
+    private static final String EXTENDED_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,:;()-?!#º\"' ";
+    private static final String ROTOR_MAPPING = "EKMFLGDQVZNTOWYHXUSPAIBRCJ0123456789.,:;()-?!#º\"' ";
 
-
-@ApplicationScoped
-public class EnigmaRepository  {
-    
-    public String encrypt(String message, String key) {
-        StringBuilder messageEncrypted = new StringBuilder();
-
-        for (int i = 0; i < message.length(); i++) {
-            char letter = message.charAt(i);
-
-            // apply the key to the letter
-            letter += key.charAt(i % key.length());
-
-            messageEncrypted.append(letter);
-
-            // update the key
-            key = updateKey(key);
-        }
-
-        return messageEncrypted.toString();
+    public EnigmaRepository(int rotorPosition) {
+        this.rotorPosition = rotorPosition;
     }
 
-    public String decrypt(String messageEncrypted, String keyCryptography) {
-        StringBuilder messageDecoded = new StringBuilder();
-
-        for (int i = 0; i < messageEncrypted.length(); i++) {
-            char letter = messageEncrypted.charAt(i);
-
-           // apply the decode key to the letter
-            letter -= keyCryptography.charAt(i % keyCryptography.length());
-
-            messageDecoded.append(letter);
-
-            // update the decryption key
-            keyCryptography = updateKey(keyCryptography);
+    public String encrypt(String message) {
+        StringBuilder encrypted = new StringBuilder();
+        for (char letter : message.toUpperCase().toCharArray()) {
+            int index = EXTENDED_ALPHABET.indexOf(letter);
+            if (index >= 0) {
+                int shiftedIndex = (index + rotorPosition) % EXTENDED_ALPHABET.length();
+                char encryptedLetter = ROTOR_MAPPING.charAt(shiftedIndex);
+                encrypted.append(encryptedLetter);
+                rotorPosition = (rotorPosition + 1) % EXTENDED_ALPHABET.length();
+            }
         }
-
-        return messageDecoded.toString();
+        return encrypted.toString();
     }
 
-    private String updateKey(String key) {
-        // increment the key value by 1
-        char lastCharacter = key.charAt(key.length() - 1);
-        char newCharacter = (char) (lastCharacter + 1);
-
-        // check if the new character is an uppercase letter
-        if (newCharacter > 'Z') {
-            newCharacter = 'A';
+    public String decrypt(String message) {
+        StringBuilder decrypted = new StringBuilder();
+        for (char letter : message.toUpperCase().toCharArray()) {
+            int index = ROTOR_MAPPING.indexOf(letter);
+            if (index >= 0) {
+                int shiftedIndex = (index - rotorPosition + ROTOR_MAPPING.length()) % ROTOR_MAPPING.length();
+                char decryptedLetter = EXTENDED_ALPHABET.charAt(shiftedIndex);
+                decrypted.append(decryptedLetter);
+            }
+            rotorPosition = (rotorPosition + 1) % EXTENDED_ALPHABET.length();
         }
-
-        // replace the last character of the key with the new character
-        return key.substring(0, key.length() - 1) + newCharacter;
+        return decrypted.toString();
     }
-    
 }
