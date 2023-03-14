@@ -38,7 +38,7 @@ If you want to build an _über-jar_, execute the following command:
 ```script
 mvn clean package -Dquarkus.package.type=uber-jar -DskipTests
 ```
-The application, packaged as an _über-jar_, is now runnable using `java -jar ./target/quarkus-social-1.0-runner.jar`.
+The application, packaged as an _über-jar_, is now runnable using `java -jar ./target/enigma-machine-1.0-runner.jar`.
 
 ## Access API specifications
 After running enigma-machine go to the URL [http://localhost:8080/q/swagger-ui/](http://localhost:8080/q/swagger-ui/)
