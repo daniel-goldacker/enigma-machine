@@ -4,10 +4,6 @@ The Enigma machine is one of the most famous and complex encryption machines eve
 
 Here is a basic example of a program that encrypts and decrypts a message using a set of user-defined keys.
 
-In this example, the program asks the user to enter a message and an encryption key. The message is then encrypted by applying the key to each character in the message. The key is repeated until it is the same length as the message. The end result is the encrypted message. The program also asks the user to enter the encrypted message they want to decrypt, along with the encryption key. The key is applied to each character of the encrypted message, similarly to the encryption process, but this time subtracting the key instead of adding it. The end result is the decrypted message.
-
-This is just a basic example and lacks the sophistication of the real Enigma machine, but it can serve as a starting point for working with encryption algorithms.
-
 **Obs:** This project uses Quarkus, the Supersonic Subatomic Java Framework. If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Project premise
