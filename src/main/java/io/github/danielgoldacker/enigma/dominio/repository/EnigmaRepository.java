@@ -2,9 +2,9 @@ package io.github.danielgoldacker.enigma.dominio.repository;
 
 public class EnigmaRepository {
     private int rotorPosition;
-    private static final String EXTENDED_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,:;()-?!#º\"' ";
-    private static final String ROTOR_MAPPING = "EKMFLGDQVZNTOWYHXUSPAIBRCJ0123456789.,:;()-?!#º\"' ";
-
+    private static final String EXTENDED_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÂÊÎÔÛÀÈÌÒÙÃẼĨÕŨÇ0123456789.,;:!?()[]{}-_/\"'@#$%&*+=<>|~`^ ";
+    private static final String ROTOR_MAPPING = "EKMFLGDQVZNTOWYHXUSPAIBRCJÁÉÍÓÚÂÊÎÔÛÀÈÌÒÙÃẼĨÕŨÇ0123456789.,;:!?()[]{}-_/\"'@#$%&*+=<>|~`^ ";
+    
     public EnigmaRepository(int rotorPosition) {
         this.rotorPosition = rotorPosition;
     }

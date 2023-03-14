@@ -1,8 +1,0 @@
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/dominio/repository/EnigmaRepository.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/EncryptRequest.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/ResponseError.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/DecryptRequest.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/DecryptResponse.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/EnigmaResource.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/FieldError.java
-/Users/danielgoldacker/Desktop/machine-enigma/src/main/java/io/github/danielgoldacker/enigma/rest/dto/EncryptResponse.java
